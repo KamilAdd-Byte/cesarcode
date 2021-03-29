@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Table(name = "user")
 @Data
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
@@ -21,4 +22,7 @@ public class User {
     @Column(name = "age")
     private int age;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_address")
+    private Address address;
 }
