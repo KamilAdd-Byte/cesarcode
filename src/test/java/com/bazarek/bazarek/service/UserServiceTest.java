@@ -45,9 +45,9 @@ class UserServiceTest {
     void shouldAddOneUserOnDataBase() {
         //given
         User expected = new User();
-        expected.setFirstName("Kasia");
-        expected.setLastName("Sulejewska");
-        expected.setAge(31);
+        expected.setFirstName("Kamil");
+        expected.setLastName("Lodziński");
+        expected.setAge(36);
         //when
         userService.addUser(expected);
 

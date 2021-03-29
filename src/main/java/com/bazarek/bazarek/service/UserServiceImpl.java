@@ -2,13 +2,16 @@ package com.bazarek.bazarek.service;
 
 import com.bazarek.bazarek.dao.UserDao;
 import com.bazarek.bazarek.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
+    @Autowired
     UserDao userRepository;
 
     @Override
@@ -17,10 +20,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void addUser(User user) {
-        if (user != null){
-            this.userRepository.save(user);
-        }else
-            throw new NullPointerException();
+        userRepository.save(user);
     }
 }
