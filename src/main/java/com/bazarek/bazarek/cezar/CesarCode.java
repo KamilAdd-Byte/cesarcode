@@ -4,6 +4,7 @@ import lombok.ToString;
 
 @ToString
 public class CesarCode {
+
     /**
      * @param text = "word to decode and encode"
      * @return decode and encode text ASCII char

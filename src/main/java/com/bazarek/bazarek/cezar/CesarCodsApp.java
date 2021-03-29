@@ -19,13 +19,13 @@ public class CesarCodsApp {
                     case 1:
                         System.out.println("Podaj tekst: ");
                         String output = sc.nextLine();
-                        String outputEncode = CesarCode.encode(output);
+                        String outputEncode = CesarCode.decode(output);
                         System.out.println(outputEncode);
                         break;
                     case 2:
                         System.out.println("Podaj tekst: ");
                         String decode = sc.nextLine();
-                        String outputDecodes = CesarCode.decode(decode);
+                        String outputDecodes = CesarCode.encode(decode);
                         System.out.println(outputDecodes);
                         break;
                     case 3:

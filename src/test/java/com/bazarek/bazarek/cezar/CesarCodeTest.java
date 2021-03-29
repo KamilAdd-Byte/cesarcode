@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 class CesarCodeTest {
 
     @Test
-    void shouldDecodeString() {
+    void shouldDecodeStringTextWithCezarCode() {
         //given
         CesarCode code = new CesarCode();
         String elmo = CesarCode.decode("Elmo");
@@ -26,6 +26,22 @@ class CesarCodeTest {
     }
 
     @Test
-    void valid() {
+    void shouldEncodeStringTextWithCezarCode() {
+        //given
+        CesarCode code = new CesarCode();
+        String kamil = CesarCode.decode("Kamil");
+        System.out.println("Zakodowany Kamil: " + kamil);
+
+        //when
+        String encode = CesarCode.encode("HDPLO");
+        System.out.println("Rozkodowany Kamil: "+encode);
+
+        //then
+
+        assertThat(kamil).isEqualTo("HDPLO");
+        assertThat(encode).isEqualTo("KGSOR")
+                .endsWith("OR")
+                .isEqualToIgnoringCase("kgsor");
+
     }
 }
