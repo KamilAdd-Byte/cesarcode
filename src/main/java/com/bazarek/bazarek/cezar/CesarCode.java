@@ -1,10 +1,14 @@
 package com.bazarek.bazarek.cezar;
 
+import lombok.ToString;
+
+@ToString
 public class CesarCode {
     /**
      * @param text = "word to decode and encode"
      * @return decode and encode text ASCII char
      */
+
     public static String encode(String text) {
         StringBuilder newString = new StringBuilder();
         for (char c : text.toCharArray()) {

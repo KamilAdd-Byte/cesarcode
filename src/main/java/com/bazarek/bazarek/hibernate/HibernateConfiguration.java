@@ -22,14 +22,14 @@ public class HibernateConfiguration {
     public LocalSessionFactoryBean sessionFactoryBean(){
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
-        sessionFactoryBean.setPackagesToScan("com.homemanagment.homemanagment");
+        sessionFactoryBean.setPackagesToScan("com.bazarek.bazarek");
         sessionFactoryBean.setHibernateProperties(hibernateProps());
         return sessionFactoryBean;
     }
 
     private Properties hibernateProps() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
+//      properties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
 //        properties.setProperty("hibernate.dialect", environment.getProperty("spring.jpa.properties.hibernate.dialect"));
         return properties;
     }

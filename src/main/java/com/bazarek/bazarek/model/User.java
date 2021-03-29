@@ -1,9 +1,11 @@
 package com.bazarek.bazarek.model;
 
+import lombok.Data;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,4 +20,5 @@ public class User {
 
     @Column(name = "age")
     private int age;
+
 }
