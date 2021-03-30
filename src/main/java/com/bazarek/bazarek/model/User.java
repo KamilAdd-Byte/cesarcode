@@ -23,6 +23,6 @@ public class User {
     private int age;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_address")
-    private Address address;
+    @JoinColumn(name = "id_user_detail")
+    private UserDetail userDetail;
 }

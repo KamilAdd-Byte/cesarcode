@@ -25,6 +25,4 @@ public class Address {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private User user;
 }
