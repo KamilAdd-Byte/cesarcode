@@ -29,19 +29,18 @@ class CesarCodeTest {
     void shouldEncodeStringTextWithCezarCode() {
         //given
         CesarCode code = new CesarCode();
-        String kamil = CesarCode.decode("Kamil");
-        System.out.println("Zakodowany Kamil: " + kamil);
-
+        String kamil = CesarCode.decode("kamil");
+        System.out.println("Zakodowany kamil: " + kamil);
         //when
-        String encode = CesarCode.encode("HDPLO");
-        System.out.println("Rozkodowany Kamil: "+encode);
+
+        String encode = CesarCode.encode("ndplo");
+        System.out.println("Odkodowany NDPLO: "+ encode);
 
         //then
 
-        assertThat(kamil).isEqualTo("HDPLO");
-        assertThat(encode).isEqualTo("KGSOR")
-                .endsWith("OR")
-                .isEqualToIgnoringCase("kgsor");
-
+        assertThat(kamil).isEqualTo("NDPLO");
+        assertThat(encode).isEqualToIgnoringCase("KAMIL")
+                .endsWith("MIL");
+        assertThat(encode).isEqualTo("KAMIL");
     }
 }

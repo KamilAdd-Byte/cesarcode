@@ -11,7 +11,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_address")
-    private int id;
+    private long id;
 
     @Column(name = "street_name",length = 50)
     private String streetName;
@@ -25,4 +25,6 @@ public class Address {
     @Column(name = "zip_code")
     private String zipCode;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private User user;
 }

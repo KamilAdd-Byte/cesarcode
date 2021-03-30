@@ -1,5 +1,6 @@
 package com.bazarek.bazarek.service;
 
+import com.bazarek.bazarek.model.Address;
 import com.bazarek.bazarek.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -48,6 +49,12 @@ class UserServiceTest {
         expected.setFirstName("Kasia");
         expected.setLastName("Sulejewska");
         expected.setAge(31);
+        Address address = new Address();
+        address.setStreetName("Bratumiły");
+        address.setHouseNumber(4);
+        address.setFlatNumber(2);
+        address.setZipCode("61-608");
+        expected.setAddress(address);
         //when
         userService.addUser(expected);
 

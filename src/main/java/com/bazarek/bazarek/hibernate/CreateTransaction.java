@@ -1,5 +1,6 @@
 package com.bazarek.bazarek.hibernate;
 
+import com.bazarek.bazarek.model.Address;
 import com.bazarek.bazarek.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +14,7 @@ public class CreateTransaction {
         conf.configure("hibernate.cfg.xml");
         //wczytanie adnotacji
         conf.addAnnotatedClass(User.class);
+        conf.addAnnotatedClass(Address.class);
         //stworzenie obiektu SessionFactory
         SessionFactory factory = conf.buildSessionFactory();
         //pobieranie sesji
@@ -24,8 +26,18 @@ public class CreateTransaction {
         user.setLastName("Sulejewska");
         user.setAge(31);
 
+        Address address = new Address();
+        address.setStreetName("Bratumiły");
+        address.setHouseNumber(4);
+        address.setFlatNumber(2);
+        address.setZipCode("61-608");
+        user.setAddress(address);
+        address.setUser(user);
+
         session.beginTransaction();
+
         session.save(user);
+        session.save(address);
 
         session.getTransaction().commit();
         //zamknięcie sesji
