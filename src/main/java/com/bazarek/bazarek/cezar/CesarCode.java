@@ -13,7 +13,7 @@ public class CesarCode {
     public static String encode(String text) {
         StringBuilder newString = new StringBuilder();
         for (char c : text.toCharArray()) {
-            char encodeChar = (char) (65 + (c - 62) % 26);
+            char encodeChar = (char) (65 + (c - 48) % 26);
             newString.append(encodeChar);
         }
         return newString.toString();
