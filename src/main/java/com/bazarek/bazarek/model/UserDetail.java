@@ -3,6 +3,7 @@ package com.bazarek.bazarek.model;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user_detail")
@@ -66,6 +67,19 @@ public class UserDetail {
 
     public void setSpecialCharacters(String specialCharacters) {
         this.specialCharacters = specialCharacters;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserDetail)) return false;
+        UserDetail that = (UserDetail) o;
+        return id == that.id && Double.compare(that.height, height) == 0 && Objects.equals(colorEyes, that.colorEyes) && Objects.equals(colorHair, that.colorHair) && Objects.equals(specialCharacters, that.specialCharacters) && Objects.equals(user, that.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, colorEyes, colorHair, height, specialCharacters, user);
     }
 
     @Override
