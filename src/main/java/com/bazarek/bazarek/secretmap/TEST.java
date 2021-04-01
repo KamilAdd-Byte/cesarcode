@@ -20,6 +20,8 @@ public class TEST {
         //utworzenie strumienia
         Stream<Movies> stream = values.stream();
         stream
+                .filter(movies -> movies.getRating() > 3)
+                .sorted()
                 .forEach(System.out::println);
         }
     }

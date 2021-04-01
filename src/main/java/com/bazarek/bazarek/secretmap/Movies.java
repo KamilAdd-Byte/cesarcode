@@ -5,7 +5,7 @@ import lombok.ToString;
 import java.util.Objects;
 
 @ToString
-public class Movies {
+public class Movies implements Comparable<Movies>{
     private String title;
     private int year;
     private double rating;
@@ -74,6 +74,15 @@ public class Movies {
     @Override
     public int hashCode() {
         return Objects.hash(title, year, rating, country);
+    }
+
+    @Override
+    public int compareTo(Movies movies) {
+//        if (rating < movies.rating)
+//            return -1;
+//        if (rating > movies.rating)
+//            return 1;
+        return this.title.compareTo(movies.title);
     }
 
     //klasa wewnętrzna

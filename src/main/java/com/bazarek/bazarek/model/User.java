@@ -1,15 +1,18 @@
 package com.bazarek.bazarek.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "user")
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
+@Table(name = "user")
 public class User {
 
     @Id
@@ -26,9 +29,21 @@ public class User {
     @Column(name = "age")
     private int age;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user_detail")
     private UserDetail userDetail;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    private Set<Movie> movies;
+
+    public void addMovies(Movie movie){
+        if (movies == null){
+           movies = new HashSet<>();
+        }
+        movies.add(movie);
+        System.out.println("Dodano film do kolekcji: " + movie);
+    }
 
     @Override
     public boolean equals(Object o) {
