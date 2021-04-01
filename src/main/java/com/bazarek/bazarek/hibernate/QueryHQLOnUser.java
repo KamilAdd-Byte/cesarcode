@@ -36,7 +36,6 @@ public class QueryHQLOnUser {
             System.out.println(userMovie);
         }
 
-
         session.getTransaction().commit();
 
         //zamknięcie sesji
