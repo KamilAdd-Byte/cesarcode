@@ -1,8 +1,14 @@
 package com.bazarek.bazarek.cezar;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Service;
 
 @ToString
+@Getter
+@Setter
+@Service
 public class CesarCode {
 
     /**

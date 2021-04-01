@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao{
     @Transactional
     public void save(User user, UserDetail detail) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(user);
+        session.save(user);
     }
 
     @Override

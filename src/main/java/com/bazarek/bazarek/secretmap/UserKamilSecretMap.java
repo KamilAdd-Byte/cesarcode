@@ -27,16 +27,17 @@ public class UserKamilSecretMap {
     public void addMovieToMap(String key, Movies movies){
         moviesMap.put(key, movies);
     }
+
     public int sizeMap(){
         int size = moviesMap.size();
         return size;
     }
 
     public Map<String, Movies> getMoviesMap() {
-        return moviesMap;
+        return this.moviesMap;
     }
 
-    private void setMoviesMap(Map<String, Movies> moviesMap) {
+    public void setMoviesMap(Map<String, Movies> moviesMap) {
         this.moviesMap = moviesMap;
     }
 }
