@@ -11,6 +11,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CesarCode {
 
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     /**
      * @param text = "word to decode and encode on cesar code"
      * @return decode and encode text ASCII char

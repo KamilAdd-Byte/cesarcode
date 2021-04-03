@@ -14,8 +14,8 @@ public class CesarCodeRestController {
     public CesarCodeRestController(final CesarCode code) {
         this.code = code;
     }
-    @GetMapping("/decode")
-    public String decodeTextOnCesarCode(@PathVariable("text") String text){
+    @GetMapping("/decode/{text}")
+    public String decodeTextOnCesarCode(@PathVariable String text){
         return CesarCode.decode(text);
     }
 }
