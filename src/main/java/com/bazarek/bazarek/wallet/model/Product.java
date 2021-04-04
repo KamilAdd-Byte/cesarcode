@@ -2,8 +2,10 @@ package com.bazarek.bazarek.wallet.model;
 
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @ToString
-public class Product {
+public class Product implements Serializable {
     private long idProduct;
     private String name;
     private double price;

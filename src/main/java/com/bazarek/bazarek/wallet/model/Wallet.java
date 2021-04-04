@@ -27,7 +27,7 @@ public class Wallet {
     public double buy (double money){
         checkYourMoney();
         if (money > myMoney){
-            System.out.println("Brak środków");
+            System.out.println("Chcesz kupić product za: "+ money+" STATUS :: Niewystarczająca ilość środków ---> masz: " + myMoney);
         }else
             myMoney = myMoney - money;
             System.out.println("Pozostało: " + myMoney);

@@ -3,9 +3,7 @@ package com.bazarek.bazarek.wallet.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
 import java.util.LinkedList;
-import java.util.stream.Stream;
 
 @ToString
 @Getter
@@ -17,12 +15,11 @@ public class ProductsLinkedList {
         myProduct.add(new Product(1,"Oscypek",3.54));
         myProduct.add(new Product(2,"Kabanosy",7.99));
         myProduct.add(new Product(3,"Babka - Łaciata",11.00));
+        System.out.println(myProduct);
         return myProduct;
     }
 
     public void removeFirstProduct(){
         myProduct.removeFirst();
     }
-
-
 }
