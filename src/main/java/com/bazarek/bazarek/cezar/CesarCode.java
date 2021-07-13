@@ -1,18 +1,35 @@
 package com.bazarek.bazarek.cezar;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Service;
 
 @ToString
+@Getter
+@Setter
+@Service
 public class CesarCode {
+
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     /**
-     * @param text = "word to decode and encode"
+     * @param text = "word to decode and encode on cesar code"
      * @return decode and encode text ASCII char
      */
 
     public static String encode(String text) {
         StringBuilder newString = new StringBuilder();
         for (char c : text.toCharArray()) {
-            char encodeChar = (char) (65 + (c - 62) % 26);
+            char encodeChar = (char) (65 + (c - 48) % 26);
             newString.append(encodeChar);
         }
         return newString.toString();

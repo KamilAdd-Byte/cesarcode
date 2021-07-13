@@ -1,6 +1,7 @@
 package com.bazarek.bazarek.dao;
 
 import com.bazarek.bazarek.model.User;
+import com.bazarek.bazarek.model.UserDetail;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,19 @@ public class UserDaoImpl implements UserDao{
     @Transactional
     public List<User> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from User ",User.class).getResultList();
+        return session.createQuery("from User",User.class).getResultList();
     }
 
     @Override
     @Transactional
-    public void save(User user) {
+    public void save(User user, UserDetail detail) {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(user);
     }
 }
