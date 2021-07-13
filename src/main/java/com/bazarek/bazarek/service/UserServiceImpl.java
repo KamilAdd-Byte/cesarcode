@@ -1,17 +1,15 @@
 package com.bazarek.bazarek.service;
 
 import com.bazarek.bazarek.dao.UserDao;
-import com.bazarek.bazarek.dao.UserDetailDao;
 import com.bazarek.bazarek.model.User;
 import com.bazarek.bazarek.model.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userRepository;
@@ -23,9 +21,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public void addUser(User user) {
+        //TODO
+    }
+
+    @Override
     @Transactional
     public void addUser(User user, UserDetail detail) {
-       this.userRepository.save(user,detail);
+        this.userRepository.save(user,detail);
     }
 
     @Override

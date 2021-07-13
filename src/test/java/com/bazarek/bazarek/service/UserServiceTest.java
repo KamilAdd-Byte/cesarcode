@@ -53,6 +53,11 @@ class UserServiceTest {
     void shouldAddOneUserOnDataBase() {
         //given
         User expected = new User();
+
+        expected.setFirstName("Kamil");
+        expected.setLastName("Lodziński");
+        expected.setAge(36);
+
         expected.setFirstName("Marian");
         expected.setLastName("Wąglewski");
         expected.setAge(67);
@@ -63,6 +68,7 @@ class UserServiceTest {
         detail.setHeight(182.87);
         detail.setSpecialCharacters("tatuaż - smok na lewym ramieniu");
         expected.setUserDetail(detail);
+
         //when
         userDetailRepository.save(detail);
         userService.addUser(expected,detail);

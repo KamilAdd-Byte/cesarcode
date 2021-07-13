@@ -15,7 +15,6 @@ public class ProductsLinkedList {
         myProduct.add(new Product(1,"Oscypek",3.54));
         myProduct.add(new Product(2,"Kabanosy",7.99));
         myProduct.add(new Product(3,"Babka - Łaciata",11.00));
-        System.out.println(myProduct);
         return myProduct;
     }
 
