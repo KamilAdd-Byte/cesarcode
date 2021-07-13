@@ -19,19 +19,17 @@ public class Wallet {
         return noMoney;
     }
 
-    public double addMoney(double money) {
+    public void addMoney(double money) {
         myMoney = money + myMoney;
-        return myMoney;
     }
 
-    public double buy (double money){
+    public void buy (double money){
         checkYourMoney();
         if (money > myMoney){
-            System.out.println("Chcesz kupić product za: "+ money+" STATUS :: Niewystarczająca ilość środków ---> masz: " + myMoney);
+            System.err.println("Chcesz kupić product za: "+ money+" STATUS :: Niewystarczająca ilość środków ---> masz: " + myMoney);
         }else
             myMoney = myMoney - money;
             System.out.println("Pozostało: " + myMoney);
-            return myMoney;
 
     }
 

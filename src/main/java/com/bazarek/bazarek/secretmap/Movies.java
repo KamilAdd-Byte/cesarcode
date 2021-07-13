@@ -4,13 +4,16 @@ import lombok.ToString;
 
 import java.util.Objects;
 
-@ToString
+
 public class Movies implements Comparable<Movies>{
     private String title;
     private int year;
     private double rating;
     private String country;
-    private final TypeMovies typeMovies;
+    private TypeMovies typeMovies;
+
+    public Movies() {
+    }
 
     public Movies(String title, int year, double rating, String country, TypeMovies typeMovies) {
         this.title = title;
