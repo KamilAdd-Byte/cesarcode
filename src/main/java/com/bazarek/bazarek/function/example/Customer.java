@@ -46,8 +46,8 @@ public class Customer {
         public B call(A1 in1);
     }
 
-    /**
-     * @param customerId number id customer
+    /** Szuka obiektu po id. Może zwrócić NULL lub wyjatek NullPointerExeption!
+     * @param customerId int id customer
      * @return customer by id if exist. Ij not exist return null.
      */
     public static Customer getCustomerById(Integer customerId){
@@ -58,6 +58,21 @@ public class Customer {
         }
         return null;
     }
+
+    /** Zwraca LISTE, która może być pusta :)
+     * @param customerId int id customer
+     * @return list exist customer by id
+     */
+    public static ArrayList<Customer> getListCustomerById(Integer customerId){
+        ArrayList<Customer> outList = new ArrayList<>();
+        for (Customer customer : Customer.allCustomer) {
+            if (customer.id == customerId){
+                outList.add(customer);
+            }
+        }
+        return outList;
+    }
+
 
 
     public static List<String> getEnabledCustomerAddress() {
