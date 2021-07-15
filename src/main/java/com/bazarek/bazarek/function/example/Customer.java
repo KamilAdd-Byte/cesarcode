@@ -1,9 +1,19 @@
 package com.bazarek.bazarek.function.example;
 
-import javax.swing.text.StyledEditorKit;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
+@Setter
+@Getter
+@ToString
+@Slf4j
 public class Customer {
 
     static public ArrayList<Customer> allCustomer = new ArrayList<Customer>();
@@ -14,16 +24,41 @@ public class Customer {
     public String primaryContact = "";
     public String domain = "";
     public Boolean enabled = true;
+    public Contract contract;
 
-    //pusty konstruktor
+    public Customer(Integer id, String name, String address, String state, String primaryContact, String domain, Boolean enabled) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.state = state;
+        this.primaryContact = primaryContact;
+        this.domain = domain;
+        this.enabled = enabled;
+    }
+
     public Customer() {
     }
+
     /**
-     * Funkcja anonimowa.
+     * Funkcja anonimowa w klasie.
      */
     private interface Function1<A1,B>{
         public B call(A1 in1);
     }
+
+    /**
+     * @param customerId number id customer
+     * @return customer by id if exist. Ij not exist return null.
+     */
+    public static Customer getCustomerById(Integer customerId){
+        for (Customer customer: Customer.allCustomer){
+            if (customer.id == customerId) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
 
     public static List<String> getEnabledCustomerAddress() {
         return Customer.getEnabledCustomerField(new Function1<Customer,String>() {
@@ -127,5 +162,22 @@ public class Customer {
         }
         return outList;
     }
-    //TODO strona 37 Programowanie funkcyjne
+
+    /**
+     * Zmienne funkcyjne EnabledCustomer i DisabledCustomer. Zastosowanie zasady DRY
+     */
+    static final public Function1<Customer,Boolean> EnabledCustomer = new Function1<Customer, Boolean>() {
+        @Override
+        public Boolean call(Customer customer) {
+            return customer.enabled = true;
+        }
+    };
+
+    static final public Function1<Customer,Boolean> DisabledCustomer = new Function1<Customer, Boolean>() {
+        @Override
+        public Boolean call(Customer customer) {
+            return customer.enabled = false;
+        }
+    };
+
 }
