@@ -39,8 +39,9 @@ public class Customer {
     public Customer() {
     }
 
-    /**
+    /** Interfejs do hermetyzacji funkcji przyjmujący jeden argument.
      * Funkcja anonimowa w klasie.
+     * @apiNote <A1> - typ przekazywany. <B> typ zwracany
      */
     private interface Function1<A1,B>{
         public B call(A1 in1);
@@ -48,7 +49,7 @@ public class Customer {
 
     /** Szuka obiektu po id. Może zwrócić NULL lub wyjatek NullPointerExeption!
      * @param customerId int id customer
-     * @return customer by id if exist. Ij not exist return null.
+     * @return customer by id if exist. If not exist return null.
      */
     public static Customer getCustomerById(Integer customerId){
         for (Customer customer: Customer.allCustomer){
@@ -63,16 +64,27 @@ public class Customer {
      * @param customerId int id customer
      * @return list exist customer by id
      */
-    public static ArrayList<Customer> getListCustomerById(Integer customerId){
+    public static ArrayList<Customer> getListCustomerById(final Integer customerId){
+        return Customer.filter(new Function1<Customer, Boolean>() {
+            @Override
+            public Boolean call(Customer customer) {
+                return customer.id == customerId;
+            }
+        });
+    }
+
+    /** Funkcja filter!
+     *
+     */
+    public static ArrayList<Customer> filter (Function1<Customer,Boolean> test){
         ArrayList<Customer> outList = new ArrayList<>();
-        for (Customer customer : Customer.allCustomer) {
-            if (customer.id == customerId){
+        for (Customer customer: Customer.allCustomer){
+            if (test.call(customer)){
                 outList.add(customer);
             }
         }
         return outList;
     }
-
 
 
     public static List<String> getEnabledCustomerAddress() {
@@ -165,15 +177,16 @@ public class Customer {
     }
 
     /**
-     * Metoda getField z funkcją testującą
+     * Metoda getField z funkcją testującą, po refactoringu.
+     * @param test
+     * @param func
+     * @param <B>
+     * @return
      */
-
     public static <B> List<B> getField(Function1<Customer,Boolean> test, Function1<Customer,B> func){
         ArrayList<B> outList = new ArrayList<B>();
-        for (Customer customer: Customer.allCustomer){
-            if (test.call(customer)){
-                outList.add(func.call(customer));
-            }
+        for (Customer customer: Customer.filter(test)){
+            outList.add(func.call(customer));
         }
         return outList;
     }

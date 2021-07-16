@@ -19,10 +19,8 @@ public class Contract {
     }
 
     public static void setContractDisabledForCustomer(Integer customerId){
-        for (Customer customer: Customer.allCustomer){
-            if (customer.id == customerId){
-                customer.contract.enabled = false;
+        for (Customer customer: Customer.getListCustomerById(customerId)){
+           customer.contract.enabled = true;
             }
         }
-    }
 }
