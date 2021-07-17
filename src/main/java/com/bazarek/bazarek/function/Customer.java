@@ -1,15 +1,14 @@
 package com.bazarek.bazarek.function;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Builder
 @Setter
 @Getter
 @ToString
@@ -37,6 +36,95 @@ public class Customer {
     }
 
     public Customer() {
+    }
+
+    private static Logger getLog() {
+        return log;
+    }
+
+    private static ArrayList<Customer> getAllCustomer() {
+        return allCustomer;
+    }
+
+    private static void setAllCustomer(ArrayList<Customer> allCustomer) {
+        Customer.allCustomer = allCustomer;
+    }
+
+    private Integer getId() {
+        return id;
+    }
+
+    public Customer setId(Integer customerId) {
+        this.id = customerId;
+        return this;
+    }
+
+    private String getName() {
+        return name;
+    }
+
+    public Customer setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    private String getAddress() {
+        return address;
+    }
+
+    private void setAddress(String address) {
+        this.address = address;
+    }
+
+    private String getState() {
+        return state;
+    }
+
+    public Customer setState(String state) {
+        this.state = state;
+        return this;
+    }
+
+    private String getPrimaryContact() {
+        return primaryContact;
+    }
+
+    private void setPrimaryContact(String primaryContact) {
+        this.primaryContact = primaryContact;
+    }
+
+    private String getDomain() {
+        return domain;
+    }
+
+    public Customer setDomain(String domain) {
+        this.domain = domain;
+        return this;
+    }
+
+    private Boolean getEnabled() {
+        return enabled;
+    }
+
+    private void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    private Contract getContract() {
+        return contract;
+    }
+
+    public Customer setContract(Contract contract) {
+        this.contract = contract;
+        return this;
+    }
+
+    private static Function1<Customer, Boolean> getEnabledCustomer() {
+        return EnabledCustomer;
+    }
+
+    private static Function1<Customer, Boolean> getDisabledCustomer() {
+        return DisabledCustomer;
     }
 
     /** Interfejs do hermetyzacji funkcji przyjmujący jeden argument.
