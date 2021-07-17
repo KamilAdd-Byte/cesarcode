@@ -1,4 +1,4 @@
-package com.bazarek.bazarek.function.example;
+package com.bazarek.bazarek.function;
 
 public class Closure {
 

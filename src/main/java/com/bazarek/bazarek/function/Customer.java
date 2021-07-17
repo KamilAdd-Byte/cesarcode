@@ -1,4 +1,4 @@
-package com.bazarek.bazarek.function.example;
+package com.bazarek.bazarek.function;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -64,8 +64,8 @@ public class Customer {
      * @param customerId int id customer
      * @return list exist customer by id
      */
-    public static ArrayList<Customer> getListCustomerById(final Integer customerId){
-        return Customer.filter(new Function1<Customer, Boolean>() {
+    public static ArrayList<Customer> getListCustomerById(ArrayList<Customer> inList, final Integer customerId){
+        return Customer.filter(inList, new Function1<Customer, Boolean>() {
             @Override
             public Boolean call(Customer customer) {
                 return customer.id == customerId;
@@ -73,12 +73,21 @@ public class Customer {
         });
     }
 
+    /** Funkcja foreach zdefiniowana w klasie Customer
+     * @param inList
+     * @param func
+     */
+    public static void foreach(List<Customer> inList, Foreach1<Customer> func){
+        for (Customer customer: inList){
+            func.call(customer);
+        }
+    }
     /** Funkcja filter!
      *
      */
-    public static ArrayList<Customer> filter (Function1<Customer,Boolean> test){
+    public static ArrayList<Customer> filter (ArrayList<Customer> inList, Function1<Customer,Boolean> test){
         ArrayList<Customer> outList = new ArrayList<>();
-        for (Customer customer: Customer.allCustomer){
+        for (Customer customer: inList){
             if (test.call(customer)){
                 outList.add(customer);
             }
@@ -185,7 +194,7 @@ public class Customer {
      */
     public static <B> List<B> getField(Function1<Customer,Boolean> test, Function1<Customer,B> func){
         ArrayList<B> outList = new ArrayList<B>();
-        for (Customer customer: Customer.filter(test)){
+        for (Customer customer: Customer.filter(Customer.allCustomer,test)){
             outList.add(func.call(customer));
         }
         return outList;
