@@ -20,7 +20,7 @@ public class TEST {
         for (String s : keySet) {
             System.out.print(s + " ");
         }
-        System.out.println("");
+        System.out.println();
 
         //utworzenie kolekcji
         Collection<Movies> values = u.myMoviesToMap().values();

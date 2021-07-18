@@ -1,9 +1,6 @@
 package com.bazarek.bazarek.secretmap;
 
-import lombok.ToString;
-
 import java.util.Objects;
-
 
 public class Movies implements Comparable<Movies>{
     private String title;
