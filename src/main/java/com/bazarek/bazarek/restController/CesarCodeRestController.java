@@ -18,4 +18,9 @@ public class CesarCodeRestController {
     public String decodeTextOnCesarCode(@PathVariable String text){
         return CesarCode.decode(text);
     }
+    @GetMapping("/encode/{text}")
+    public String encodeTextOnCesarCode(@PathVariable String text){
+        return CesarCode.encode(text);
+    }
+
 }
