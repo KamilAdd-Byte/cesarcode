@@ -1,6 +1,9 @@
-# Cesar code & WALLET
+# Cipher-algorithms on Cesar Code and Polibius Chessboard
 
-- definition: https://pl.wikipedia.org/wiki/Szyfr_Cezara
+## Cesar code & Polybius chessboard
+
+- definition Cesar code: https://pl.wikipedia.org/wiki/Szyfr_Cezara
+- definition Polybius chessboard: https://pl.wikipedia.org/wiki/Szachownica_Polibiusza
 - API build Maven
 - API Spring boot project generate
 

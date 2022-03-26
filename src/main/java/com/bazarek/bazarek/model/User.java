@@ -42,6 +42,12 @@ public class User {
     @JoinTable(name = "user_training",joinColumns = @JoinColumn(name = "id_user"),inverseJoinColumns = @JoinColumn(name = "id_training"))
     private List<Training> trainings;
 
+    public User(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
     public void addMovies(Movie movie){
         if (movies == null){
            movies = new HashSet<>();

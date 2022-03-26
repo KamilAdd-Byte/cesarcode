@@ -87,23 +87,23 @@ public class Movies implements Comparable<Movies>{
 
     //klasa wewnętrzna
     public static class TypeMovies {
-        private String name;
+        private Category category;
         boolean watches;
 
-        public TypeMovies(String name, boolean watches) {
-            this.name = name;
+        public TypeMovies(Category category, boolean watches) {
+            this.category = category;
             this.watches = watches;
         }
 
-        public String getName() {
-            return name;
+        private Category getCategory() {
+            return category;
         }
 
-        private void setName(String name) {
-            this.name = name;
+        private void setCategory(Category category) {
+            this.category = category;
         }
 
-        public boolean isWatches() {
+        private boolean isWatches() {
             return watches;
         }
 
@@ -114,10 +114,12 @@ public class Movies implements Comparable<Movies>{
         @Override
         public String toString() {
             String result = "Typ filmu: ";
-            result+= " Kategoria: " + name;
+            result+= " Kategoria: " + category.toString();
             result+= " Czy oglądałem?: " + watches;
             return result;
         }
     }
-
+    public enum Category {
+        THRILLER, COMEDY, SCIENTIFICATION, DRAMA, ACTION, HORROR;
+    }
 }
