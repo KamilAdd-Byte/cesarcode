@@ -1,8 +1,13 @@
 package com.bazarek.bazarek.secretmap;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Component
 public class UserKamilSecretMap {
 
     public Map<String,Movies> moviesMap = new HashMap<>();
@@ -39,5 +44,14 @@ public class UserKamilSecretMap {
 
     public void setMoviesMap(Map<String, Movies> moviesMap) {
         this.moviesMap = moviesMap;
+    }
+
+    /** Created by K.Sulejewski
+     * @param firstLetter it's first letter which found movie
+     * @return list all movie which starts with firstLetter
+     */
+    public List<Movies> movieByTitle (String firstLetter){
+        String firstLetterToUpperCase = firstLetter.toUpperCase();
+        return myMoviesToMap().values().stream().filter(t -> t.getTitle().toUpperCase().startsWith(firstLetterToUpperCase)).collect(Collectors.toList());
     }
 }
