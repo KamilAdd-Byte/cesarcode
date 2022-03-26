@@ -13,9 +13,9 @@ public class SecurityCodeDataBase {
 
     public List<SecurityCode> allSecurityCode = new ArrayList<>();
 
-    public static Stream<SecurityCode> getWbk(){
-        Stream<SecurityCode> codeStream = SecurityCodeDataBase
-    }
+//    public static Stream<SecurityCode> getWbk(){
+//        Stream<SecurityCode> codeStream = SecurityCodeDataBase
+//    }
 
 
     public void addSecurityCode (SecurityCode securityCode) {
