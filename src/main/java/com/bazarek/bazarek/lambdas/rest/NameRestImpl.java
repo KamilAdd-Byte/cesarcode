@@ -1,8 +1,8 @@
 package com.bazarek.bazarek.lambdas.rest;
 
+import com.bazarek.bazarek.db.MoviesDataBase;
 import com.bazarek.bazarek.lambdas.inte.FunctionCompleteName;
 import com.bazarek.bazarek.secretmap.Movies;
-import com.bazarek.bazarek.secretmap.UserKamilSecretMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +16,10 @@ import java.util.Map;
 public class NameRestImpl implements NameRestController{
 
     private final FunctionCompleteName functionCompleteName;
-    private final UserKamilSecretMap movie;
+    private final MoviesDataBase movie;
 
     @Autowired
-    public NameRestImpl(final FunctionCompleteName functionCompleteName, UserKamilSecretMap movie) {
+    public NameRestImpl(final FunctionCompleteName functionCompleteName, MoviesDataBase movie) {
         this.functionCompleteName = functionCompleteName;
         this.movie = movie;
     }
@@ -34,7 +34,7 @@ public class NameRestImpl implements NameRestController{
     @Override
     @GetMapping(value = "/movies")
     public ResponseEntity<Map<String,Movies>> getMyMovie() {
-        Map<String, Movies> stringMoviesMap = movie.myMoviesToMap();
+        Map<String, Movies> stringMoviesMap = movie.allMovies();
         return ResponseEntity.ok().body(stringMoviesMap);
     }
 
