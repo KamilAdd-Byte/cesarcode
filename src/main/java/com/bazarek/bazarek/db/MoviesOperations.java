@@ -1,13 +1,13 @@
 package com.bazarek.bazarek.db;
 
-import com.bazarek.bazarek.secretmap.Movies;
+import com.bazarek.bazarek.db.model.Movie;
 import java.util.List;
 import java.util.Map;
 
 public interface MoviesOperations {
-    Map<String, Movies> allMovies();
+    Map<String, Movie> allMovies();
 
-    void addMovie(String key, Movies movies);
+    void addMovie(String key, Movie movies);
 
     /**
      * Created by K.Sulejewski
@@ -15,7 +15,7 @@ public interface MoviesOperations {
      * @param firstLetter it's first letter which found movie
      * @return list all movie which starts with firstLetter
      */
-    List<Movies> movieByTitle(String firstLetter);
+    List<Movie> movieByTitle(String firstLetter);
 
     /**
      * @param movieTitle it's first movie title for db if exist

@@ -2,7 +2,7 @@ package com.bazarek.bazarek.lambdas.rest;
 
 import com.bazarek.bazarek.db.MoviesDataBase;
 import com.bazarek.bazarek.lambdas.inte.FunctionCompleteName;
-import com.bazarek.bazarek.secretmap.Movies;
+import com.bazarek.bazarek.db.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,15 +33,15 @@ public class NameRestImpl implements NameRestController{
 
     @Override
     @GetMapping(value = "/movies")
-    public ResponseEntity<Map<String,Movies>> getMyMovie() {
-        Map<String, Movies> stringMoviesMap = movie.allMovies();
+    public ResponseEntity<Map<String, Movie>> getMyMovie() {
+        Map<String, Movie> stringMoviesMap = movie.allMovies();
         return ResponseEntity.ok().body(stringMoviesMap);
     }
 
     @Override
     @GetMapping(value = "/movies/{letter}")
-    public ResponseEntity<List<Movies>> getMyMovieByFirstLetter(@PathVariable ("letter") String firstLetter) {
-        List<Movies> movieByTitle = movie.movieByTitle(firstLetter);
+    public ResponseEntity<List<Movie>> getMyMovieByFirstLetter(@PathVariable ("letter") String firstLetter) {
+        List<Movie> movieByTitle = movie.movieByTitle(firstLetter);
         return ResponseEntity.ok().body(movieByTitle);
     }
 

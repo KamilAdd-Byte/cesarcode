@@ -2,6 +2,7 @@ package com.bazarek.bazarek.secretmap;
 
 import com.bazarek.bazarek.db.MoviesDataBase;
 import com.bazarek.bazarek.db.MoviesOperations;
+import com.bazarek.bazarek.db.model.Movie;
 import java.util.*;
 import java.util.stream.Stream;
 import static java.util.Arrays.asList;
@@ -23,11 +24,11 @@ public class TEST {
         System.out.println();
 
         //utworzenie kolekcji
-        Collection<Movies> values = movies.allMovies().values();
+        Collection<Movie> values = movies.allMovies().values();
 
 
         //utworzenie strumienia
-        Stream<Movies> stream = values.stream();
+        Stream<Movie> stream = values.stream();
         stream
                 .filter(movie -> movie.getRating() > 5)
                 .filter(m -> m.getCountry().equalsIgnoreCase("Usa"))
@@ -44,10 +45,10 @@ public class TEST {
                 .flatMap(Collection::stream)
                 .collect(toList());
 
-        Map<String, Movies> myMovies = movies.allMovies();
-        List<Movies> movieList = new ArrayList<>(myMovies.values());
+        Map<String, Movie> myMovies = movies.allMovies();
+        List<Movie> movieList = new ArrayList<>(myMovies.values());
 
-        Movies minRatingMovie = movieList.stream().min(Comparator.comparingDouble(Movies::getRating)).get();
+        Movie minRatingMovie = movieList.stream().min(Comparator.comparingDouble(Movie::getRating)).get();
 
     }
 }

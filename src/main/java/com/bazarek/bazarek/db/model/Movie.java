@@ -1,55 +1,26 @@
-package com.bazarek.bazarek.secretmap;
+package com.bazarek.bazarek.db.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.Objects;
 
-public class Movies implements Comparable<Movies>{
+@Getter
+@Setter
+@NoArgsConstructor
+public class Movie implements Comparable<Movie>{
     private String title;
     private int year;
     private double rating;
     private String country;
     private TypeMovies typeMovies;
 
-    public Movies() {
-    }
-
-    public Movies(String title, int year, double rating, String country, TypeMovies typeMovies) {
+    public Movie(String title, int year, double rating, String country, TypeMovies typeMovies) {
         this.title = title;
         this.year = year;
         this.rating = rating;
         this.country = country;
         this.typeMovies = typeMovies;
-    }
-
-    public String getTitle (){
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     @Override
@@ -66,8 +37,8 @@ public class Movies implements Comparable<Movies>{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Movies)) return false;
-        Movies movies = (Movies) o;
+        if (!(o instanceof Movie)) return false;
+        Movie movies = (Movie) o;
         return year == movies.year && Double.compare(movies.rating, rating) == 0 && Objects.equals(title, movies.title) && Objects.equals(country, movies.country);
     }
 
@@ -77,15 +48,17 @@ public class Movies implements Comparable<Movies>{
     }
 
     @Override
-    public int compareTo(Movies movies) {
-//        if (rating < movies.rating)
-//            return -1;
-//        if (rating > movies.rating)
-//            return 1;
+    public int compareTo(Movie movies) {
+        if (rating < movies.rating)
+            return -1;
+        if (rating > movies.rating)
+            return 1;
         return this.title.compareTo(movies.title);
     }
 
-    //klasa wewnętrzna
+    @Setter
+    @Getter
+    @NoArgsConstructor
     public static class TypeMovies {
         private Category category;
         boolean watches;
@@ -97,18 +70,6 @@ public class Movies implements Comparable<Movies>{
 
         private Category getCategory() {
             return category;
-        }
-
-        private void setCategory(Category category) {
-            this.category = category;
-        }
-
-        private boolean isWatches() {
-            return watches;
-        }
-
-        private void setWatches(boolean watches) {
-            this.watches = watches;
         }
 
         @Override
