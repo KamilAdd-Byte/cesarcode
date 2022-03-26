@@ -1,5 +1,6 @@
 package com.bazarek.bazarek.db.model;
 
+import com.bazarek.bazarek.db.model.type.MovieType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,9 +14,9 @@ public class Movie implements Comparable<Movie>{
     private int year;
     private double rating;
     private String country;
-    private TypeMovies typeMovies;
+    private MovieType typeMovies;
 
-    public Movie(String title, int year, double rating, String country, TypeMovies typeMovies) {
+    public Movie(String title, int year, double rating, String country, MovieType typeMovies) {
         this.title = title;
         this.year = year;
         this.rating = rating;
@@ -30,7 +31,7 @@ public class Movie implements Comparable<Movie>{
                 ", rok - '" + year +'\'' +
                 ", ocena - '" + rating + '\''+
                 ", kraj - '" + country + '\'' +
-                ", info dodatkowe: " + typeMovies +
+                ", kategoria: " + typeMovies +
                 '}';
     }
 
@@ -54,33 +55,5 @@ public class Movie implements Comparable<Movie>{
         if (rating > movies.rating)
             return 1;
         return this.title.compareTo(movies.title);
-    }
-
-    @Setter
-    @Getter
-    @NoArgsConstructor
-    public static class TypeMovies {
-        private Category category;
-        boolean watches;
-
-        public TypeMovies(Category category, boolean watches) {
-            this.category = category;
-            this.watches = watches;
-        }
-
-        private Category getCategory() {
-            return category;
-        }
-
-        @Override
-        public String toString() {
-            String result = "Typ filmu: ";
-            result+= " Kategoria: " + category.toString();
-            result+= " Czy oglądałem?: " + watches;
-            return result;
-        }
-    }
-    public enum Category {
-        THRILLER, COMEDY, SCIENTIFICATION, DRAMA, ACTION, HORROR;
     }
 }
