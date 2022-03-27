@@ -1,4 +1,4 @@
-# Cipher-algoritms on Cesar Code and Polibius Chessboard
+# Cipher-algorithms on Cesar Code and Polibius Chessboard
 
 ## Cesar code & Polybius chessboard
 
