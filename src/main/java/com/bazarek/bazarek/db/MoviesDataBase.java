@@ -70,22 +70,21 @@ public class MoviesDataBase implements MoviesOperations{
      */
     @Override
     public StringBuilder getBestMovieByRating(String movieTitle, String otherMovieTitle) {
-        Movie expectedMovie = null;
         StringBuilder stringBuilder = new StringBuilder();
         Map<Movie, Double> moviesList = allMovies().values().stream()
                 // dzięki operatorowi || podczas filter przefitruje oba argumenty
                 .filter(m -> m.getTitle().contains(movieTitle) || m.getTitle().contains(otherMovieTitle))
                 .collect(Collectors.toMap(d -> d, d -> d.getRating().getWatcherRate()));
 
+        Movie bestMovie = moviesList.keySet().stream().max(Comparator.comparingDouble(m -> m.getRating().getWatcherRate())).get();
+
         for (Movie movie : moviesList.keySet()) {
             stringBuilder
                     .append(movie.getTitle()).append(" r: ").append(movie.getRating().getWatcherRate())
                     .append("\n");
         }
-//        List<RatingWatcher> ratingsWatchers = moviesList.stream().map(Movie::getRating).collect(Collectors.toList());
-//        ratingsWatchers.sort(Comparator.comparingDouble(RatingWatcher::getWatcherRate).reversed());
-//        RatingWatcher movies = ratingsWatchers.get(0);
-//        stringBuilder.append("Film z większym rating: ").append(movies.getWatcherRate());
+
+        stringBuilder.append("Film z większym rating: ").append(bestMovie);
 
         return stringBuilder;
     }
