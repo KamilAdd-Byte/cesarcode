@@ -2,6 +2,7 @@ package com.bazarek.bazarek.db;
 
 import com.bazarek.bazarek.db.model.Movie;
 import com.bazarek.bazarek.db.model.type.MovieType;
+import com.bazarek.bazarek.rating.RatingWatcher;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -21,22 +22,22 @@ public class MoviesDataBase implements MoviesOperations{
     @Override
     public Map<String, Movie> allMovies(){
         moviesMap = new HashMap<>();
-        moviesMap.put("Bat-1",new Movie("Batman",2000,7.2,"USA", MovieType.ACTION));
-        moviesMap.put("Bat-5",new Movie("Batman-Mroczny rycerz",2018,8.3,"USA",MovieType.ACTION));
-        moviesMap.put("Bos-6",new Movie("Boso po ściernisku",2017,5.6,"Danish",MovieType.COMEDY));
-        moviesMap.put("Bol-1",new Movie("Ból",2017,2.0,"Belgium",MovieType.DRAMA));
-        moviesMap.put("Czp-2",new Movie("Czarny Piotruś",1963,8.0,"Slowakia",MovieType.WAR));
-        moviesMap.put("Dgm-9",new Movie("Dogman",2018,4.1,"France",MovieType.DRAMA));
-        moviesMap.put("Gno-2",new Movie("GNIAZDO",2017,4.3,"Portugal",MovieType.DRAMA));
-        moviesMap.put("Isa-3",new Movie("Istota",2017,6.9,"Polish",MovieType.SCIENTIFICATION));
-        moviesMap.put("Wqe-1",new Movie("Skazani na Shawshank",1994,8.76,"USA",MovieType.DRAMA));
-        moviesMap.put("WPP-4",new Movie("Władca Pierścieni: Powrót króla",2003,8.33,"New Zeland",MovieType.FANTASY));
-        moviesMap.put("LsS-4",new Movie("Lista Schindlera",1993,8.4,"USA",MovieType.DRAMA));
-        moviesMap.put("Sev-7",new Movie("Siedem",1995,8.3,"USA",MovieType.THRILLER));
-        moviesMap.put("Cpp-4",new Movie("Chłopiec w pasiastej piżamie",2008,8.1,"UK",MovieType.DRAMA));
-        moviesMap.put("Qds-4",new Movie("SpiderMan",2020,7.1,"UK",MovieType.DRAMA));
-        moviesMap.put("eAs-4",new Movie("HULK",2018,8.7,"UK",MovieType.FANTASY));
-        moviesMap.put("WWW", new Movie("DIablo", 2021, 6.99, "Poland", MovieType.HORROR));
+        moviesMap.put("Bat-1",new Movie("Batman",2000,new RatingWatcher(true,7.8),"USA", MovieType.ACTION));
+        moviesMap.put("Bat-5",new Movie("Batman-Mroczny rycerz",2018,new RatingWatcher(true,8.2),"USA",MovieType.ACTION));
+        moviesMap.put("Bos-6",new Movie("Boso po ściernisku",2017,new RatingWatcher(true,8.2),"Danish",MovieType.COMEDY));
+        moviesMap.put("Bol-1",new Movie("Ból",2017,new RatingWatcher(true,2.2),"Belgium",MovieType.DRAMA));
+        moviesMap.put("Czp-2",new Movie("Czarny Piotruś",1963,new RatingWatcher(true,5.3),"Slowakia",MovieType.WAR));
+        moviesMap.put("Dgm-9",new Movie("Dogman",2018,new RatingWatcher(true,6.1),"France",MovieType.DRAMA));
+        moviesMap.put("Gno-2",new Movie("GNIAZDO",2017,new RatingWatcher(true,3.2),"Portugal",MovieType.DRAMA));
+        moviesMap.put("Isa-3",new Movie("Istota",2017,new RatingWatcher(true,7.2),"Polish",MovieType.SCIENTIFICATION));
+        moviesMap.put("Wqe-1",new Movie("Skazani na Shawshank",1994,new RatingWatcher(true,8.8),"USA",MovieType.DRAMA));
+        moviesMap.put("WPP-4",new Movie("Władca Pierścieni: Powrót króla",2003,new RatingWatcher(true,8.1),"New Zeland",MovieType.FANTASY));
+        moviesMap.put("LsS-4",new Movie("Lista Schindlera",1993,new RatingWatcher(true,8.9),"USA",MovieType.DRAMA));
+        moviesMap.put("Sev-7",new Movie("Siedem",1995,new RatingWatcher(true,8.6),"USA",MovieType.THRILLER));
+        moviesMap.put("Cpp-4",new Movie("Chłopiec w pasiastej piżamie",2008,new RatingWatcher(true,6.5),"UK",MovieType.DRAMA));
+        moviesMap.put("Qds-4",new Movie("SpiderMan",2020,new RatingWatcher(true,7.3),"UK",MovieType.DRAMA));
+        moviesMap.put("eAs-4",new Movie("HULK",2018,new RatingWatcher(true,7.0),"UK",MovieType.FANTASY));
+        moviesMap.put("WWW", new Movie("DIablo", 2021, new RatingWatcher(true,4.8), "Poland", MovieType.HORROR));
         return moviesMap;
     }
 
@@ -69,21 +70,22 @@ public class MoviesDataBase implements MoviesOperations{
      */
     @Override
     public StringBuilder getBestMovieByRating(String movieTitle, String otherMovieTitle) {
+        Movie expectedMovie = null;
         StringBuilder stringBuilder = new StringBuilder();
-        List<Movie> moviesList = allMovies().values().stream()
+        Map<Movie, Double> moviesList = allMovies().values().stream()
                 // dzięki operatorowi || podczas filter przefitruje oba argumenty
                 .filter(m -> m.getTitle().contains(movieTitle) || m.getTitle().contains(otherMovieTitle))
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(d -> d, d -> d.getRating().getWatcherRate()));
 
-        for (Movie movie : moviesList) {
+        for (Movie movie : moviesList.keySet()) {
             stringBuilder
-                    .append(movie.getTitle()).append(" r: ").append(movie.getRating())
-                    .append(" ");
+                    .append(movie.getTitle()).append(" r: ").append(movie.getRating().getWatcherRate())
+                    .append("\n");
         }
-
-        moviesList.sort(Comparator.comparingDouble(Movie::getRating).reversed());
-        Movie movies = moviesList.get(0);
-        stringBuilder.append(" Film z większym rating: ").append(movies.getTitle());
+//        List<RatingWatcher> ratingsWatchers = moviesList.stream().map(Movie::getRating).collect(Collectors.toList());
+//        ratingsWatchers.sort(Comparator.comparingDouble(RatingWatcher::getWatcherRate).reversed());
+//        RatingWatcher movies = ratingsWatchers.get(0);
+//        stringBuilder.append("Film z większym rating: ").append(movies.getWatcherRate());
 
         return stringBuilder;
     }

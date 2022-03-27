@@ -3,6 +3,10 @@ package com.bazarek.bazarek.secretmap;
 import com.bazarek.bazarek.db.MoviesDataBase;
 import com.bazarek.bazarek.db.MoviesOperations;
 import com.bazarek.bazarek.db.model.Movie;
+import com.bazarek.bazarek.rating.Rating;
+import com.bazarek.bazarek.rating.RatingCritic;
+import com.bazarek.bazarek.rating.RatingWatcher;
+
 import java.util.*;
 import java.util.stream.Stream;
 import static java.util.Arrays.asList;
@@ -30,7 +34,7 @@ public class TEST {
         //utworzenie strumienia
         Stream<Movie> stream = values.stream();
         stream
-                .filter(movie -> movie.getRating() > 5)
+                .filter(movie -> movie.getRating().getWatcherRate() > 5)
                 .filter(m -> m.getCountry().equalsIgnoreCase("Usa"))
                 .forEach(System.out::println);
 
@@ -48,8 +52,18 @@ public class TEST {
         Map<String, Movie> myMovies = movies.allMovies();
         List<Movie> movieList = new ArrayList<>(myMovies.values());
 
-        Movie minRatingMovie = movieList.stream().min(Comparator.comparingDouble(Movie::getRating)).get();
+       // Movie minRatingMovie = movieList.stream().min(Comparator.comparingDouble(Movie::getRating)).get();
 
+        Rating rating = new RatingWatcher();
+        rating.addRating(8.8);
+        rating.setDescription("Cool movie");
+        rating.setWatch(true);
+        System.out.println(rating.getDescription());
+
+        Rating criticRating = new RatingCritic();
+        criticRating.setDescription("Fucking drama");
+        criticRating.addRating(4.4);
+        System.out.println(criticRating);
     }
 }
 
